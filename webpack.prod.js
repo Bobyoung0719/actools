@@ -1,26 +1,25 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+// const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
   entry: './src/main.tsx',
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    library: 'UNI',
-    libraryTarget: 'umd'
+    filename: 'index.js',
+    path: path.resolve(__dirname, 'dist')
   },
   module: {
     rules: [
       {
         test: /\.tsx$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/
+        loader: 'ts-loader'
       },
       {
-        test: /\.(c|sc)ss$/,
-        use: [
-          'style-loader',
+        test: /\.(sc|c|sa)ss$/,
+        use:[
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
           'sass-loader'
@@ -41,10 +40,14 @@ module.exports = {
       }
     ]
   },
+  
   resolve: {
-    extensions: ['.js', '.json', '.ts', '.tsx', 'jsx'],
+    extensions: ['.js', '.json', '.ts', '.tsx', '.jsx'],
   },
   plugins: [
-    new HtmlWebpackPlugin({template: './temp.html'})
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash:8].css',
+      ignoreOrder: true
+    }),
   ]
-}
+};

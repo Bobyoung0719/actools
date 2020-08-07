@@ -71,7 +71,6 @@ function App() {
     <AlexPulling 
       onRefresh={handlePull}
     >
-      <p>111111111111111111</p>
       {btn.map(v => 
         <button 
           key={v}
@@ -87,3 +86,7 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 );
+
+module.exports = {
+  Dialog, Toast, Mask, Loading, AlexPulling
+}
