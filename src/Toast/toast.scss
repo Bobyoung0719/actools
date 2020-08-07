@@ -1,0 +1,26 @@
+.toast-container {
+  position: fixed;
+  z-index: 600;
+  overflow: hidden;
+  padding: 10px 35px;
+  left: 50%;
+  top: 10%;
+  font-size: 30px;
+  color: #333;
+  border-radius: 10px;
+  background-color:#fff;
+  box-shadow: 0 3px 8px rgba(#ccc, .3);
+  transform-origin: 0 0;
+
+  &.hide {
+    transition: transform .2s ease, opacity .1s ease;
+    transform: scale(0) translate3d(-50%, 0, 0);
+    opacity: 0;
+  }
+
+  &.show {
+    transition: transform .2s ease, opacity .1s .1s ease;
+    transform: scale(1) translate3d(-50%, 0, 0);
+    opacity: 1;
+  } 
+}
