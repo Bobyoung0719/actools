@@ -25,6 +25,6 @@ module.exports = {
       runtimeHelpers: true,   
     }),
     postcss(),
-    terser()
+    // terser()
   ]
 }

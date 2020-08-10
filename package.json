@@ -1,7 +1,7 @@
 {
   "name": "@alex_yang/tools", 
-  "version": "1.0.2",
-  "description": "private function-tools components",
+  "version": "1.0.4",
+  "description": "common typescript components",
   "main": "dist/tools.umd.js",
   "module": "./dist/tools.es5.js",
   "scripts": {
@@ -16,8 +16,9 @@
   },
   "keywords": [
     "react",
-    "urijs",
-    "bable",
+    "typescript",
+    "babel",
+    "rollup",
     "javascript"
   ],
   "browserslist": [
