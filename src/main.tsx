@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Dialog from './Dialog';
-import Toast from './Toast';
-import Mask from './Mask';
-import Loading from './Loading';
+import Dialog from './components/Dialog';
+import Toast from './components/Toast';
+import Mask from './components/Mask';
+import Loading from './components/Loading';
 
-import AlexPulling from './AlexPulling';
+import AlexPulling from './components/AlexPulling';
 
 import './main.scss';
 
