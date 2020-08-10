@@ -1,12 +1,12 @@
+import './main.scss';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Dialog from './components/Dialog';
 import Toast from './components/Toast';
 import Mask from './components/Mask';
 import Loading from './components/Loading';
-import AlexPulling from './components/AlexPulling';
+import {AlexPulling} from '../dist/tools.es5';
 
-import './main.scss';
 
 const btn = ['test dialog', 'test toast', 'test mask', 'test loding'];
 
