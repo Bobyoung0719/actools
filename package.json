@@ -1,5 +1,5 @@
 {
-  "name": "@young/tools",
+  "name": "@alex_yang/tools", 
   "version": "1.0.0",
   "description": "private function-tools components",
   "main": "dist/tools.umd.js",
