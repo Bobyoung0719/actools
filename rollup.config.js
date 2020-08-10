@@ -11,7 +11,7 @@ module.exports = {
   input: './src/app.tsx',
   output: [
     {file: pkg.module, format: 'es', sourcemap: true},
-    {file: pkg.main, format: 'umd', sourcemap: true}
+    {file: pkg.main, name: 'tools', format: 'umd', sourcemap: true}
   ],
   external: ['react', 'react-dom'],
   plugins: [
