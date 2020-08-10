@@ -6,4 +6,4 @@ import AlexPulling from './components/AlexPulling';
 
 import './main.scss';
 
-export default {Dialog, Toast, Mask, Loading, AlexPulling};
+export {Dialog, Toast, Mask, Loading, AlexPulling};
