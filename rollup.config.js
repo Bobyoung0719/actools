@@ -3,6 +3,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import babel from "rollup-plugin-babel";
 import typescript from 'rollup-plugin-typescript2';
 import postcss from 'rollup-plugin-postcss';
+import {terser} from 'rollup-plugin-terser';
 
 const pkg = require('./package.json');
 
@@ -10,7 +11,7 @@ module.exports = {
   input: './src/app.tsx',
   output: [
     {file: pkg.module, format: 'es', sourcemap: true},
-    {file: pkg.main, name: 'alex', format: 'umd', sourcemap: true}
+    {file: pkg.main, format: 'umd', sourcemap: true}
   ],
   external: ['react', 'react-dom'],
   plugins: [
@@ -23,6 +24,7 @@ module.exports = {
       exclude: 'node_modules/**',
       runtimeHelpers: true,   
     }),
-    postcss()
+    postcss(),
+    terser()
   ]
 }

@@ -1,10 +1,9 @@
 {
-  "name": "@alex_yang/tools",
-  "version": "1.0.3",
+  "name": "@young/tools",
+  "version": "1.0.0",
   "description": "private function-tools components",
-  "main": "dist/alex.umd.js",
-  "module": "./dist/alex.es5.js",
-  "typings": "dist/types/alex.d.ts",
+  "main": "dist/tools.umd.js",
+  "module": "./dist/tools.es5.js",
   "scripts": {
     "build": "rollup -c",
     "start": "webpack-dev-server --config webpack.dev.js --progress",
