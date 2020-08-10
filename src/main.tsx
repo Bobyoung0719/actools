@@ -67,7 +67,6 @@ function App() {
     <Loading 
       visible={loadingMsg}
     />    
-
     <AlexPulling 
       onRefresh={handlePull}
     >
@@ -87,6 +86,3 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-module.exports = {
-  Dialog, Toast, Mask, Loading, AlexPulling
-}
