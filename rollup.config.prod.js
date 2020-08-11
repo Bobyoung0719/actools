@@ -4,7 +4,6 @@ import babel from '@rollup/plugin-babel';
 import typescript from 'rollup-plugin-typescript2';
 import postcss from 'rollup-plugin-postcss';
 import {terser} from 'rollup-plugin-terser';
-import url from '@rollup/plugin-url';
 import autoprefixer from 'autoprefixer';
 
 const pkg = require('./package.json');
@@ -28,9 +27,6 @@ module.exports = {
       minimize: true,
       plugins: [autoprefixer()]
     }),
-    terser(),
-    url({
-      publicPath: '../'
-    })
+    terser()
   ]
 }
