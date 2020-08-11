@@ -5,4 +5,5 @@ import Mask from './components/Mask';
 import Loading from './components/Loading';
 import AlexPulling from './components/AlexPulling';
 
-export {Dialog, Toast, Mask, Loading, AlexPulling};
+import http from './tool/http';
+export {Dialog, Toast, Mask, Loading, AlexPulling, http};

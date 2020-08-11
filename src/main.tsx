@@ -7,9 +7,11 @@ import Mask from './components/Mask';
 import Loading from './components/Loading';
 import AlexPulling from './components/AlexPulling';
 
+import http from './tool/http';
 
 const btn = ['test dialog', 'test toast', 'test mask', 'test loding'];
 
+const {useEffect} = React;
 function App() {
   const [dialogMsg, setDialog] = React.useState(null);
   const [toastMsg, setToast] = React.useState(null);
@@ -40,12 +42,21 @@ function App() {
   }
 
   function handlePull(success) {
-
     setTimeout(() => {
       success('下拉刷新完成！！！')
     }, 1000);
 
   }
+
+  useEffect(() => {
+    async function init() {
+      const data = await http({}, 'https://api.apiopen.top/musicDetails?id=604392760')
+
+      console.log(data);
+    }
+
+    // init();
+  }, [])
 
   return <>
     <Dialog 
@@ -73,6 +84,12 @@ function App() {
         <button 
           key={v}
           className="test-btn"
+          style={{
+            padding: '10px', 
+            color: '#f00',
+            fontSize: '14px',
+            margin: '5px 10px'
+          }}
           onClick={() => setTestContent(v)}
         >{v}</button>  
       )}
@@ -84,4 +101,3 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 );
-

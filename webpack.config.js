@@ -41,6 +41,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json', '.ts', '.tsx', '.jsx'],
   },
+  devServer: {hot: true},
   plugins: [
     new HtmlWebpackPlugin({template: './temp.html'})
   ]
