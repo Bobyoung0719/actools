@@ -77,7 +77,7 @@ export default function AlexPulling(props: Props) {
 
   // 触摸事件
   function touchStart(evt) {
-
+    current.arrDom.style.transform = 'rotate(0)';
     current.tipArea.style.transition = 'none';
     current.startPos = evt.touches[0].pageY;
   }
@@ -90,7 +90,6 @@ export default function AlexPulling(props: Props) {
     if(current.distance <= 0 || current.distance > maxPullDistance) return;
 
     // 改变箭头样式
-    current.arrDom.style.transform = 'rotate(0)';
     current.arrDom.className = 'iconfont arrow';
     current.arrDom.innerHTML = '&#xe659;';
 
@@ -101,8 +100,9 @@ export default function AlexPulling(props: Props) {
     // 达到临界值更新文本
     if(current.distance >= ponitPos) {
       current.textDom.innerHTML = '释放更新';
-      current.arrDom.style.transform = 'rotate(180deg)';
-    } 
+    } else {
+      current.arrDom.style.transform = `rotate(${(180 / ponitPos) * current.distance}deg)`;
+    }
   }
 
   // 手指移除事件
@@ -130,7 +130,7 @@ export default function AlexPulling(props: Props) {
     <div className="alex-pull-box" id="pull-dom">
       <div className={`tip-area ${className}`} id="tip-area">
         <div className="tip-text" id="tip-status">
-          <i></i>
+          <i />
           <span>下拉刷新</span>
         </div>
       </div>
@@ -145,7 +145,7 @@ export default function AlexPulling(props: Props) {
 AlexPulling.defaultProps = {
   ponitPos: 100,
   className: '',
-  maxPullDistance: 300,
+  maxPullDistance: 200,
   children: <p>下拉刷新组件</p>,
   onRefresh(success = () => {}) {
     success();
