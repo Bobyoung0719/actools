@@ -8,6 +8,7 @@
     "build": "rollup -c rollup.config.prod.js --progress",
     "rollupstart": "rollup -w -c rollup.config.dev.js --progress ",
     "start": "webpack-dev-server --progress",
+    "publish": "npm run build && npm publish",
     "lint": "standard *.ts",
     "lint:fix": "standard --fix"
   },
