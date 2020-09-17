@@ -6,4 +6,15 @@ import Loading from './components/Loading';
 import AlexPulling from './components/AlexPulling';
 
 import http from './tool/http';
-export {Dialog, Toast, Mask, Loading, AlexPulling, http};
+import { toast, setTitle } from './tool/jsSdk';
+
+export {
+  Dialog, 
+  Toast, 
+  Mask, 
+  Loading, 
+  AlexPulling, 
+  http,
+  toast,
+  setTitle
+};

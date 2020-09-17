@@ -9,7 +9,7 @@ import html from '@rollup/plugin-html';
 import globals from 'rollup-plugin-node-globals';
 
 module.exports = {
-  input: './src/main.tsx',
+  input: './src/main.ts',
   output: {
     file: './dist/index.js',
     format: 'umd',

@@ -11,7 +11,7 @@ import autoprefixer from 'autoprefixer';
 const pkg = require('./package.json');
 
 module.exports = {
-  input: './src/app.tsx',
+  input: './src/app.ts',
   output: [
     {file: pkg.module, format: 'es', sourcemap: true},
     {file: pkg.main, name: 'tools', format: 'umd', sourcemap: true}

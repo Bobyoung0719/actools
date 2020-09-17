@@ -5,3 +5,6 @@ declare module '*.jpeg'
 declare module '*.gif'
 declare module '*.bmp'
 declare module '*.tiff'
+
+declare var isContainer: boolean;
+declare var JsBridge: any;
