@@ -6,7 +6,7 @@ import Loading from './components/Loading';
 import AlexPulling from './components/AlexPulling';
 
 import http from './tool/http';
-import { toast, setTitle } from './tool/jsSdk';
+import { toast, setTitle, isContainer } from './tool/jsSdk';
 
 export {
   Dialog, 
@@ -16,5 +16,6 @@ export {
   AlexPulling, 
   http,
   toast,
-  setTitle
+  setTitle,
+  isContainer
 };

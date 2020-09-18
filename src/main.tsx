@@ -8,6 +8,7 @@ import Loading from './components/Loading';
 import AlexPulling from './components/AlexPulling';
 
 import http from './tool/http';
+import { toast, setTitle, isContainer } from './tool/jsSdk';
 
 const btn = ['test dialog', 'test toast', 'test mask', 'test loding'];
 
@@ -54,6 +55,8 @@ function App() {
 
       console.log(data);
     }
+
+    console.log(isContainer(), '=========')
 
     // init();
   }, [])

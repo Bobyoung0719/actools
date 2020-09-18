@@ -1,10 +1,6 @@
-(<any>window).isContainer = false;
+// webView创建的时候会建立一个通信通道，会在window注册一个JsBridge
 
 (<any>window).nativeCall = res => {
-
-  // 判断是不是app容器
-  (<any>window).isContainer = () => true;
-
   console.log('来自native的反馈：', res);
 }
 
@@ -16,7 +12,7 @@ interface Params {
 
 // 向natinve注册信息
 function execMsg(data) {
-  if(isContainer) {
+  if(JsBridge) {
 
     const json = JSON.stringify(data);
 
@@ -26,8 +22,21 @@ function execMsg(data) {
   }
 }
 
+export function isContainer() {
+  let isApp = false;
+  
+  try {
+    isApp = !!JsBridge;
+    console.log('app环境提供JsBridge：', JsBridge)
+  } catch (error) {
+    console.log('非app环境！');
+  }
+
+  return isApp;
+}
+
 /**
- * 
+ * 设置toast
  * @param params
  * callBack 回调函数
  * duration 持续时间
@@ -48,7 +57,7 @@ export function toast({ callBack, ...last }) {
 }
 
 /**
- * 
+ * 设置title
  * @param param0 
  *  title 标题
  *  color 标题颜色
