@@ -100,9 +100,8 @@ export default function AlexPulling(props: Props) {
     // 达到临界值更新文本
     if(current.distance >= ponitPos) {
       current.textDom.innerHTML = '释放更新';
-    } else {
-      current.arrDom.style.transform = `rotate(${(180 / ponitPos) * current.distance}deg)`;
-    }
+      current.arrDom.style.transform = 'rotate(180deg)';
+    } 
   }
 
   // 手指移除事件

@@ -6,9 +6,11 @@ import Loading from './components/Loading';
 import AlexPulling from './components/AlexPulling';
 
 import http from './tool/http';
+import Tool from './tool/tool';
 import { toast, setTitle, isContainer } from './tool/jsSdk';
 
 export {
+  Tool,
   Dialog, 
   Toast, 
   Mask, 

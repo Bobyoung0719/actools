@@ -4,13 +4,15 @@ import * as ReactDOM from 'react-dom';
 import Dialog from './components/Dialog';
 import Toast from './components/Toast';
 import Mask from './components/Mask';
+import Empty from './components/Empty';
+import Share from './components/Share';
 import Loading from './components/Loading';
 import AlexPulling from './components/AlexPulling';
 
 import http from './tool/http';
-import { toast, setTitle, isContainer } from './tool/jsSdk';
+// import { toast, setTitle, isContainer } from './tool/jsSdk';
 
-const btn = ['test dialog', 'test toast', 'test mask', 'test loding'];
+const btn = ['test dialog', 'test toast', 'test mask', 'test loding', 'test share'];
 
 const {useEffect} = React;
 function App() {
@@ -18,6 +20,8 @@ function App() {
   const [toastMsg, setToast] = React.useState(null);
   const [maskMsg, setMask] = React.useState(false);
   const [loadingMsg, setLoading] = React.useState(false);
+
+  const [shareVisible, setShareVisible] = React.useState(false);
 
   function setTestContent(val) {
     switch (true) {
@@ -30,11 +34,15 @@ function App() {
       break;
 
       case val == 'test mask':
-        setMask(true)
+        setMask(!maskMsg)
       break;
 
       case val == 'test loding':
-        setLoading(true)
+        setLoading(!loadingMsg)
+      break;
+
+      case val == 'test share':
+        setShareVisible(!shareVisible)
       break;
 
       default:
@@ -51,15 +59,29 @@ function App() {
 
   useEffect(() => {
     async function init() {
-      const data = await http({}, 'https://api.apiopen.top/musicDetails?id=604392760')
+      const data = await http(`${location.origin}/alexApi/userInfo`)
 
       console.log(data);
     }
-
-    console.log(isContainer(), '=========')
-
-    // init();
+    init();
   }, [])
+
+  function handleShare(type) {
+    // 暂时没有介入微信分享，只能做复制链接手动分享
+    const input = document.createElement('input')
+    document.body.appendChild(input);
+    input.setAttribute('value', `${location.href}?shareType=${type}`);
+    input.select();
+
+    if (document.execCommand('copy')) {
+      document.execCommand('copy')
+      setToast('复制链接成功');
+
+      setTimeout(() => {
+        setShareVisible(false);
+      }, 10);
+    }
+  }
 
   return <>
     <Dialog 
@@ -96,7 +118,13 @@ function App() {
           onClick={() => setTestContent(v)}
         >{v}</button>  
       )}
+      <Empty />
+     
     </AlexPulling>
+    <Share 
+      visible={shareVisible}
+      onAction={handleShare}
+    />
   </>
 }
 

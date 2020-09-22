@@ -43,7 +43,14 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json', '.ts', '.tsx', '.jsx'],
   },
-  devServer: {hot: true},
+  devServer: {
+    hot: true,
+    contentBase: './dist',
+    historyApiFallback: true,
+    proxy: {
+      '/alexApi': 'http://118.25.154.99:3000',
+    }
+  },
   plugins: [
     new HtmlWebpackPlugin({template: './temp.html'})
   ]

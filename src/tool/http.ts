@@ -1,6 +1,6 @@
 import * as axios from 'axios';
  
-async function http(params: object = {}, reqUrl: string, methods: string = 'get') {
+async function http(reqUrl: string, params: object = {}, methods: string = 'get') {
 
   try {
     const {data = {}, status} = await axios[methods](reqUrl, params);
@@ -10,7 +10,7 @@ async function http(params: object = {}, reqUrl: string, methods: string = 'get'
       data.message = 'success';
       return data;
     } else {
-      return {status, message: 'fail'}
+      return { status, message: 'fail' };
     }
   } catch (err) {
     throw new Error(JSON.stringify(err.message));
