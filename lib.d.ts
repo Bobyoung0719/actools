@@ -6,5 +6,5 @@ declare module '*.gif'
 declare module '*.bmp'
 declare module '*.tiff'
 
-declare var isContainer: boolean;
+declare var isContainer: Function;
 declare var JsBridge: any;

@@ -1,5 +1,7 @@
 // webView创建的时候会建立一个通信通道，会在window注册一个JsBridge
 
+import URI from 'urijs';
+
 (<any>window).nativeCall = res => {
   console.log('来自native的反馈：', res);
 }
@@ -12,7 +14,7 @@ interface Params {
 
 // 向natinve注册信息
 function execMsg(data) {
-  if(JsBridge) {
+  if(isNative) {
 
     const json = JSON.stringify(data);
 
@@ -27,13 +29,14 @@ export function isContainer() {
   
   try {
     isApp = !!JsBridge;
-    console.log('app环境提供JsBridge：', JsBridge)
   } catch (error) {
     console.log('非app环境！');
   }
 
   return isApp;
 }
+
+const isNative = isContainer();
 
 /**
  * 设置toast
@@ -58,7 +61,7 @@ export function toast({ callBack, ...last }) {
 
 /**
  * 设置title
- * @param param0 
+ * @param param
  *  title 标题
  *  color 标题颜色
  *  bgColor 标题背景颜色
@@ -79,4 +82,51 @@ export function setTitle({ callBack, ...last }) {
   execMsg(data);
 }
 
+/**
+ * native login or web login
+ */
 
+export function login() {
+  if(isNative) {
+    execMsg({ method: 'nativeLogin' });
+  } else {
+    window.location.href = `${location.origin}/login?backUrl=${location.href}`
+  }
+}
+
+/**
+ * 自定义页面跳转
+ * @params
+ * url 跳转地址
+ * isCloseCurPage 是否关闭当前页面，默认false
+ */
+interface UrlParams {
+  url: string,
+  [key: string]: any
+  isCloseCurPage?: boolean
+}
+export function pageInit(params: UrlParams) {
+  const { url, isCloseCurPage = false, ...lastArgs } = params;
+
+  if(!url) return;
+
+  const uri = new URI(url);
+  const newUrl = uri.addQuery(lastArgs).href();
+
+  if(isNative) {
+    execMsg({ 
+      method: 'pageSkip',
+      params: { url: newUrl, isNewWebView: !isCloseCurPage } 
+    });
+    return;
+  } 
+
+  if(url.includes('http')) {
+    if(isCloseCurPage) {
+      window.location.replace(newUrl);
+    } else {
+      window.location.href = newUrl;
+    }
+  }
+
+}

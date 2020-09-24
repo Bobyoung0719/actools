@@ -10,7 +10,7 @@ import Loading from './components/Loading';
 import AlexPulling from './components/AlexPulling';
 
 import http from './tool/http';
-// import { toast, setTitle, isContainer } from './tool/jsSdk';
+import { pageInit } from './tool/jsSdk';
 
 const btn = ['test dialog', 'test toast', 'test mask', 'test loding', 'test share'];
 
@@ -67,6 +67,8 @@ function App() {
   }, [])
 
   function handleShare(type) {
+
+  // pageInit({url: 'https://www.jd.com', name: 'alex_yonf'});
     // 暂时没有介入微信分享，只能做复制链接手动分享
     const input = document.createElement('input')
     document.body.appendChild(input);
