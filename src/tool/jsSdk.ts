@@ -99,34 +99,95 @@ export function login() {
  * @params
  * url 跳转地址
  * isCloseCurPage 是否关闭当前页面，默认false
+ * 其他参数
  */
+
 interface UrlParams {
   url: string,
   [key: string]: any
   isCloseCurPage?: boolean
 }
+
 export function pageInit(params: UrlParams) {
   const { url, isCloseCurPage = false, ...lastArgs } = params;
 
   if(!url) return;
 
-  const uri = new URI(url);
+  let uri = '';
+
+  // 如果不是有效的url，则将此字符串替换当前url的filename
+  if(!(url.substring(0, 10).includes('://'))) {
+    uri = new URI(window.location.href);
+    uri.filename(url);
+  } else {
+    uri = new URI(url);
+  }
+
   const newUrl = uri.addQuery(lastArgs).href();
 
+  console.log('newUrl:', newUrl)
+
+  // native跳转
   if(isNative) {
     execMsg({ 
       method: 'pageSkip',
       params: { url: newUrl, isNewWebView: !isCloseCurPage } 
     });
-    return;
-  } 
-
-  if(url.includes('http')) {
+  } else {
     if(isCloseCurPage) {
       window.location.replace(newUrl);
     } else {
       window.location.href = newUrl;
     }
   }
+}
 
+/**
+ * goBack 返回
+ * @parmas
+ * isRefresh false
+ * backNum 返回到第几页 -1
+ */
+
+export function goBack(isRefresh = false, backNum = -1) {
+  if(isRefresh) {
+    window.location.href = document.referrer;
+  } else {
+    window.history.go(backNum);
+  }
+}
+
+/**
+ * 页面可见执行函数
+ * @params
+ * callBack
+ */
+
+let hidden, visibilityChange; 
+
+if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support 
+  hidden = "hidden";
+  visibilityChange = "visibilitychange";
+} else if (typeof document.msHidden !== "undefined") {
+  hidden = "msHidden";
+  visibilityChange = "msvisibilitychange";
+} else if (typeof document.webkitHidden !== "undefined") {
+  hidden = "webkitHidden";
+  visibilityChange = "webkitvisibilitychange";
+}
+
+export function onAppear(callBack = (visible: boolean) => {}) {
+  // 如果浏览器不支持addEventListener 或 Page Visibility API 给出警告
+  if (typeof document.addEventListener === "undefined" || typeof document[hidden] === "undefined") {
+    console.log("This demo requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.");
+  } else {
+    // 处理页面可见属性的改变
+    document.addEventListener(visibilityChange, () => {
+      if(document[hidden] === "visible") {
+        callBack(true);
+      } else if(document[hidden] === "hiddle") {
+        callBack(false);
+      }
+    }, false);
+  }
 }
