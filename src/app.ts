@@ -7,7 +7,7 @@ import AlexPulling from './components/AlexPulling';
 
 import http from './tool/http';
 import Tool from './tool/tool';
-import { toast, setTitle, isContainer } from './tool/jsSdk';
+import { toast, setTitle, isContainer, onAppear, goBack, pageInit, login } from './tool/jsSdk';
 
 export {
   Tool,
@@ -19,5 +19,9 @@ export {
   http,
   toast,
   setTitle,
-  isContainer
+  isContainer,
+  onAppear,
+  goBack,
+  pageInit,
+  login
 };
