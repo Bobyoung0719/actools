@@ -113,7 +113,7 @@ export function pageInit(params: UrlParams) {
 
   if(!url) return;
 
-  let uri = '';
+  let uri: any;
 
   // 如果不是有效的url，则将此字符串替换当前url的filename
   if(!(url.substring(0, 10).includes('://'))) {
