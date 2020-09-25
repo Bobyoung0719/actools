@@ -151,7 +151,7 @@ export function pageInit(params: UrlParams) {
 
 export function goBack(isRefresh = false, backNum = -1) {
   if(isRefresh) {
-    window.location.href = document.referrer;
+    window.location.href = (document as any).referrer;
   } else {
     window.history.go(backNum);
   }
@@ -163,29 +163,29 @@ export function goBack(isRefresh = false, backNum = -1) {
  * callBack
  */
 
-let hidden, visibilityChange; 
+let hidden: string, visibilityChange: string; 
 
-if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support 
+if (typeof (document as any).hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support 
   hidden = "hidden";
   visibilityChange = "visibilitychange";
-} else if (typeof document.msHidden !== "undefined") {
+} else if (typeof (document as any).msHidden !== "undefined") {
   hidden = "msHidden";
   visibilityChange = "msvisibilitychange";
-} else if (typeof document.webkitHidden !== "undefined") {
+} else if (typeof (document as any).webkitHidden !== "undefined") {
   hidden = "webkitHidden";
   visibilityChange = "webkitvisibilitychange";
 }
 
 export function onAppear(callBack = (visible: boolean) => {}) {
   // 如果浏览器不支持addEventListener 或 Page Visibility API 给出警告
-  if (typeof document.addEventListener === "undefined" || typeof document[hidden] === "undefined") {
+  if (typeof (document as any).addEventListener === "undefined" || typeof (document as any)[hidden] === "undefined") {
     console.log("This demo requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.");
   } else {
     // 处理页面可见属性的改变
-    document.addEventListener(visibilityChange, () => {
-      if(document[hidden] === "visible") {
+    (document as any).addEventListener(visibilityChange, () => {
+      if((document as any)[hidden] === "visible") {
         callBack(true);
-      } else if(document[hidden] === "hiddle") {
+      } else if((document as any)[hidden] === "hiddle") {
         callBack(false);
       }
     }, false);
