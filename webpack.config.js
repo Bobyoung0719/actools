@@ -48,7 +48,7 @@ module.exports = {
     contentBase: './dist',
     historyApiFallback: true,
     proxy: {
-      '/alexApi': 'http://118.25.154.99:3000',
+      '/ybbApi': 'http://localhost:4000',
     }
   },
   plugins: [
