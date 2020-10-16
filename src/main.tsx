@@ -12,7 +12,7 @@ import AlexPulling from './components/AlexPulling';
 import http from './tool/http';
 import { pageInit, onAppear } from './tool/jsSdk';
 
-const btn = ['test dialog', 'test toast', 'test mask', 'test loding', 'test share'];
+const btn = ['test-dialog', 'test-toast', 'test-mask', 'test-loding', 'test-share', 'go-login'];
 
 const {useEffect} = React;
 function App() {
@@ -25,24 +25,29 @@ function App() {
 
   function setTestContent(val) {
     switch (true) {
-      case val == 'test dialog':
+      case val == 'test-dialog':
           setDialog(val);
         break;
       
-      case val == 'test toast':
+      case val == 'test-toast':
         setToast(val)
       break;
 
-      case val == 'test mask':
+      case val == 'test-mask':
         setMask(!maskMsg)
       break;
 
-      case val == 'test loding':
+      case val == 'test-loding':
         setLoading(!loadingMsg)
       break;
 
-      case val == 'test share':
+      case val == 'test-share':
         setShareVisible(!shareVisible)
+      break;
+
+      case val == 'go-login':
+
+        window.location.href = `http://118.25.154.99/login?backUrl=${location.href}`
       break;
 
       default:
@@ -60,14 +65,14 @@ function App() {
   useEffect(() => {
     async function init() {
       // get
-      const dq = await http(`${location.origin}/ybbApi/dishList`)
+      const dq = await http(`${location.origin}/ybbApi/loginStatus`)
 
       console.log(dq, '=====111111111');
 
       // post
-      const data = await http(`${location.origin}/ybbApi/postList`, {dishId: 10000}, 'post')
+      // const data = await http(`${location.origin}/ybbApi/postList`, {dishId: 10000}, 'post')
 
-      console.log(data, '====');
+      // console.log(data, '====');
     }
     init();
 
