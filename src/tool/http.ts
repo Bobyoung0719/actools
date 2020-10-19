@@ -6,13 +6,13 @@ interface reqParams {
  
 async function http(reqUrl: string, params?:reqParams) {
   try {
-    let { token, method = 'get', ...lastParams } = params;  
+    let { token, method = 'get', ...lastParams } = params || {};  
 
     // 针对使用nestjs作为服务请求层，auth认证需要在headers中添加一个Authorization字段，且值为token
     if(token) {
       lastParams.headers = { Authorization: `Bearer ${token}` };
     }
-
+    
     const { data = {}, status } = await axios[method](reqUrl, lastParams);
 
     if(+status < 300) {
