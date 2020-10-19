@@ -65,9 +65,9 @@ function App() {
   useEffect(() => {
     async function init() {
       // get
-      const dq = await http(`${location.origin}/ybbApi/loginStatus`)
+      // const dq = await http(`${location.origin}/ybbApi/loginStatus`)
 
-      console.log(dq, '=====111111111');
+      // console.log(dq, '=====111111111');
 
       // post
       // const data = await http(`${location.origin}/ybbApi/postList`, {dishId: 10000}, 'post')

@@ -90,7 +90,7 @@ export function login() {
   if(isNative) {
     execMsg({ method: 'nativeLogin' });
   } else {
-    window.location.href = `${location.origin}/login?backUrl=${location.href}`
+    window.location.href = `http://118.25.154.99/login?backUrl=${location.href}`
   }
 }
 
