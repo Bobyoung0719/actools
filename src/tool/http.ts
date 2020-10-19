@@ -13,13 +13,13 @@ async function http(reqUrl: string, params?:reqParams) {
       lastParams.headers = { Authorization: `Bearer ${token}` };
     }
     
-    const { data = {}, status } = await axios[method](reqUrl, lastParams);
+    const { data, status } = await axios[method](reqUrl, lastParams);
 
-    if(+status < 300) {
+    if(+status < 300 && data) {
       return {
         result: data,
         code: status,
-        message: 'Request succeeded!'
+        message: 'Request succeeded!',
       };
     } else {
       return { code: status, message: 'Request Fail', result: '' };
