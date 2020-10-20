@@ -89,8 +89,10 @@ export function setTitle({ callBack, ...last }) {
 export function login() {
   if(isNative) {
     execMsg({ method: 'nativeLogin' });
+  } else if(location.hostname.includes('localhost')) {
+    window.location.href = `http://localhost:8888?backUrl=${location.href}`;
   } else {
-    window.location.href = `http://118.25.154.99/login?backUrl=${location.href}`
+    window.location.href = `http://118.25.154.99/login?backUrl=${location.href}`;
   }
 }
 
