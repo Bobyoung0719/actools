@@ -1,6 +1,7 @@
 // webView创建的时候会建立一个通信通道，会在window注册一个JsBridge
 
 import URI from 'urijs';
+import { isProd } from './tool';
 
 (<any>window).nativeCall = res => {
   console.log('来自native的反馈：', res);
@@ -89,7 +90,7 @@ export function setTitle({ callBack, ...last }) {
 export function login() {
   if(isNative) {
     execMsg({ method: 'nativeLogin' });
-  } else if(location.hostname.includes('localhost')) {
+  } else if(!isProd) {
     window.location.href = `http://localhost:8888?backUrl=${location.href}`;
   } else {
     window.location.href = `http://118.25.154.99/login?backUrl=${location.href}`;

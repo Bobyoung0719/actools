@@ -1,17 +1,18 @@
-export default class Tool {
-  /**
-   * 获取真实像素值
-   * @param raw 传入的数值
-   * @param defaultSize 设计稿的基准
-   */
-  static px(raw, defaultSize = 75) {
-    const htmlFontSize = document.documentElement.style.fontSize;
-    const realSize = +htmlFontSize.substring(0, htmlFontSize.length - 2);
+/**
+ * @param raw 真实的像素值
+ * @param defaultSize 默认的fontSize 一般是按750设计稿
+ */
 
-    if(realSize === defaultSize) {
-      return raw;
-    }
+export function px(raw, defaultSize = 75) {
+  const htmlFontSize = document.documentElement.style.fontSize;
+  const realSize = +htmlFontSize.substring(0, htmlFontSize.length - 2);
 
-    return (realSize * raw) / defaultSize;
+  if(realSize === defaultSize) {
+    return raw;
   }
+
+  return (realSize * raw) / defaultSize;
 }
+
+// 是不是生产环境
+export const isProd = (location.hostname !== 'localhost');
