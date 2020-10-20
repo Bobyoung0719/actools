@@ -13,25 +13,12 @@ async function http(reqUrl: string, params?:reqParams) {
       lastParams.headers = { Authorization: `Bearer ${token}` };
     }
     
-    const { data = {}, status } = await axios[method](reqUrl, lastParams);
+    const { data , status } = await axios[method](reqUrl, lastParams);
 
     if(+status < 300) {
-      // 没有登录的情况
-      if(data.code == -1) {
-        return {
-          code: -1,
-          result: '',
-          message: data.message
-        }
-      } else {
-        return {
-          result: data,
-          code: status,
-          message: 'Request succeeded!',
-        };
-      }
+      return data;
     } else {
-      return { code: status, message: 'Request Fail', result: '' };
+      return { code: status, result: '', message: 'Request Fail' };
     }
   } catch (err) {
     throw new Error(JSON.stringify(err.message));
