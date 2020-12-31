@@ -1,12 +1,11 @@
 {
   "name": "@alex_yang/tools",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "common typescript components",
   "main": "dist/tools.umd.js",
   "module": "./dist/tools.es5.js",
   "scripts": {
-    "build": "rollup -c rollup.config.prod.js --progress",
-    "rollupstart": "rollup -w -c rollup.config.dev.js --progress ",
+    "build": "rollup -c --progress",
     "start": "webpack-dev-server --progress",
     "publish": "npm run build && npm publish",
     "lint": "standard *.ts",
@@ -31,6 +30,7 @@
     "iOS 7",
     "last 3 iOS versions"
   ],
+  "files": ["dist", "./src/components"],
   "author": "alex_young",
   "license": "MIT",
   "bugs": {

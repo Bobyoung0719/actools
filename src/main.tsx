@@ -10,6 +10,8 @@ import Loading from './components/Loading';
 import AlexPulling from './components/AlexPulling';
 
 import http from './tool/http';
+import { checkLogin } from './tool/tool'
+import VideoForReact from './components/VideoForReact';
 import { pageInit, onAppear } from './tool/jsSdk';
 
 const btn = ['test-dialog', 'test-toast', 'test-mask', 'test-loding', 'test-share', 'go-login'];
@@ -63,13 +65,18 @@ function App() {
   }
 
   useEffect(() => {
-    // async function init() {
-    // }
-    // init();
 
     onAppear(visible => {
       console.log('visible', visible);
     })
+    async function init() {
+      const data = await checkLogin();
+
+      console.log(data);
+    }
+
+    init();
+
   }, [])
 
   function handleShare(type) {
@@ -126,8 +133,8 @@ function App() {
           onClick={() => setTestContent(v)}
         >{v}</button>  
       )}
-      <Empty />
-     
+      {/* <Empty /> */}
+     {/* <VideoForReact /> */}
     </AlexPulling>
     <Share 
       visible={shareVisible}

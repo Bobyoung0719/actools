@@ -48,7 +48,7 @@ module.exports = {
     contentBase: './dist',
     historyApiFallback: true,
     proxy: {
-      '/ybbApi': 'http://localhost:4000',
+      '/ybbApi': 'http://118.25.154.99:4000', // 登录
     }
   },
   plugins: [
